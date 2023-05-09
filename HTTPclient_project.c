@@ -38,6 +38,7 @@
 
 int initialization();
 int connection( int internet_socket );
+
 void execution( int internet_socket );
 void cleanup( int internet_socket, int client_internet_socket );
 
@@ -153,6 +154,16 @@ int connection( int internet_socket )
 		perror( "accept" );
 		close( internet_socket );
 		exit( 3 );
+	}
+	else
+	{
+		
+		char ip_address[INET6_ADDRSTRLEN];
+        struct sockaddr_in6 *sockaddr_ipv6 = (struct sockaddr_in6 *)&client_internet_address;
+        void *addr = &(sockaddr_ipv6->sin6_addr);
+        inet_ntop(AF_INET6, addr, ip_address, INET6_ADDRSTRLEN);
+        printf("%s\n", ip_address);
+		
 	}
 	return client_socket;
 }
