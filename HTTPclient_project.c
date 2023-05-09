@@ -46,32 +46,35 @@ int main( int argc, char * argv[] )
 	//////////////////
 	//Initialization//
 	//////////////////
+	int internet_socket = 0;
+	int client_internet_socket = 0;
+	
+	
+		OSInit();
+		internet_socket = initialization();
+	while (1)
+	{
+		//////////////
+		//Connection//
+		//////////////
 
-	OSInit();
+		client_internet_socket = connection( internet_socket );
 
-	int internet_socket = initialization();
+		/////////////
+		//Execution//
+		/////////////
 
-	//////////////
-	//Connection//
-	//////////////
+		execution( client_internet_socket );
 
-	int client_internet_socket = connection( internet_socket );
+	}	
+		////////////
+		//Clean up//
+		////////////
 
-	/////////////
-	//Execution//
-	/////////////
+		cleanup( internet_socket, client_internet_socket );
 
-	execution( client_internet_socket );
-
-
-	////////////
-	//Clean up//
-	////////////
-
-	cleanup( internet_socket, client_internet_socket );
-
-	OSCleanup();
-
+		OSCleanup();
+	
 	return 0;
 }
 
