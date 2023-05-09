@@ -38,7 +38,7 @@
 
 int initialization();
 int connection( int internet_socket );
-
+void logs( char * );
 void execution( int internet_socket );
 void cleanup( int internet_socket, int client_internet_socket );
 
@@ -162,8 +162,8 @@ int connection( int internet_socket )
         struct sockaddr_in6 *sockaddr_ipv6 = (struct sockaddr_in6 *)&client_internet_address;
         void *addr = &(sockaddr_ipv6->sin6_addr);
         inet_ntop(AF_INET6, addr, ip_address, INET6_ADDRSTRLEN);
-        printf("%s\n", ip_address);
-		
+        //printf("%s\n", ip_address);
+		logs( ip_address);
 	}
 	return client_socket;
 }
@@ -205,4 +205,11 @@ void cleanup( int internet_socket, int client_internet_socket )
 	//Step 4.1
 	close( client_internet_socket );
 	close( internet_socket );
+}
+
+void logs( char * ip_address)
+{
+	FILE *filePointer = fopen( "logs.txt", "a" ); // Ask Operating System to open a file on the file system to write
+	fprintf(filePointer, "%s\n", ip_address);
+	fclose( filePointer );                        // Let de Operating System know we are no longer needing access to the file
 }
