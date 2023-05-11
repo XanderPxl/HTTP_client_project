@@ -38,7 +38,7 @@
 
 int initialization();
 int connection( int internet_socket );
-
+void logs( char * );
 void execution( int internet_socket );
 void cleanup( int internet_socket, int client_internet_socket );
 
@@ -162,35 +162,76 @@ int connection( int internet_socket )
         struct sockaddr_in6 *sockaddr_ipv6 = (struct sockaddr_in6 *)&client_internet_address;
         void *addr = &(sockaddr_ipv6->sin6_addr);
         inet_ntop(AF_INET6, addr, ip_address, INET6_ADDRSTRLEN);
-        printf("%s\n", ip_address);
-		
+        //printf("%s\n", ip_address);
+		logs( ip_address);
 	}
 	return client_socket;
 }
 
 void execution( int internet_socket )
 {
-	//Step 3.1
-	int number_of_bytes_received = 0;
-	char buffer[1000];
-	number_of_bytes_received = recv( internet_socket, buffer, ( sizeof buffer ) - 1, 0 );
-	if( number_of_bytes_received == -1 )
-	{
-		perror( "recv" );
-	}
-	else
-	{
-		buffer[number_of_bytes_received] = '\0';
-		printf( "Received : %s\n", buffer );
-	}
-
 	//Step 3.2
-	int number_of_bytes_send = 0;
-	number_of_bytes_send = send( internet_socket, "Hello TCP world!", 16, 0 );
-	if( number_of_bytes_send == -1 )
+	
+	//Stream sockets and rcv()
+    struct addrinfo HTTP_socket;
+    struct addrinfo *res;
+	int sockfd;
+	
+    char get_request[100000];
+    char received[100000];
+    int byte_count;
+	
+	//get host info, make socket and connect it
+    memset(&HTTP_socket, 0,sizeof HTTP_socket);
+	
+    HTTP_socket.ai_family=AF_UNSPEC;
+    HTTP_socket.ai_socktype = SOCK_STREAM;
+	
+    int result = getaddrinfo("ip-api.com","80", &HTTP_socket, &res);
+	
+    sockfd = socket(res->ai_family,res->ai_socktype,res->ai_protocol);
+	if( sockfd == -1 )
 	{
-		perror( "send" );
+		perror( "Connection socket error" );
+		close( sockfd );
+		exit( 1 );
 	}
+	
+    result = connect(sockfd,res->ai_addr,res->ai_addrlen);
+    if( result == -1 )
+	{
+		perror( "Connection error" );
+		close( sockfd );
+		exit( 1 );
+	}
+	
+	snprintf(get_request, 100000,
+        "GET /json/24.48.0.1 HTTP/1.1\r\n"
+        "Host: ip-api.com\r\n"
+        "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0\r\n"
+        "Accept: */*\r\n"
+        "Connection: close\r\n"
+        "\r\n"
+    );
+	result = send(sockfd, get_request, strlen(get_request), 0);
+	if( result == -1 )
+	{
+		perror( "send error" );
+		close( sockfd );
+		exit( 1 );
+	}
+	
+	result = recv(sockfd, received, 100000 - 1, 0);
+	if( result == -1 )
+	{
+		perror( "receive error" );
+		close( sockfd );
+		exit( 1 );
+	}
+	printf("%s", received);
+	freeaddrinfo(res);
+    close(sockfd);
+	
 }
 
 void cleanup( int internet_socket, int client_internet_socket )
@@ -205,4 +246,11 @@ void cleanup( int internet_socket, int client_internet_socket )
 	//Step 4.1
 	close( client_internet_socket );
 	close( internet_socket );
+}
+
+void logs( char * ip_address)
+{
+	FILE *filePointer = fopen( "logs.txt", "a" ); // Ask Operating System to open a file on the file system to write
+	fprintf(filePointer, "%s\n", ip_address);
+	fclose( filePointer );                        // Let de Operating System know we are no longer needing access to the file
 }
