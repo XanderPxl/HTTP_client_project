@@ -42,6 +42,8 @@ void logs( char * );
 void execution( int internet_socket );
 void cleanup( int internet_socket, int client_internet_socket );
 
+char ip_address[16];
+
 int main( int argc, char * argv[] )
 {
 	//////////////////
@@ -146,6 +148,7 @@ int initialization()
 int connection( int internet_socket )
 {
 	//Step 2.1
+	
 	struct sockaddr_storage client_internet_address;
 	socklen_t client_internet_address_length = sizeof client_internet_address;
 	int client_socket = accept( internet_socket, (struct sockaddr *) &client_internet_address, &client_internet_address_length );
@@ -158,12 +161,15 @@ int connection( int internet_socket )
 	else
 	{
 		
-		char ip_address[INET6_ADDRSTRLEN];
+		char ipAddress[INET6_ADDRSTRLEN];
         struct sockaddr_in6 *sockaddr_ipv6 = (struct sockaddr_in6 *)&client_internet_address;
         void *addr = &(sockaddr_ipv6->sin6_addr);
-        inet_ntop(AF_INET6, addr, ip_address, INET6_ADDRSTRLEN);
-        //printf("%s\n", ip_address);
-		logs( ip_address);
+        inet_ntop(AF_INET6, addr, ipAddress, INET6_ADDRSTRLEN);
+        //printf("%s\n", ipAddress);
+		logs( ipAddress);
+		//ip_address = calloc( sizeof(char), strlen("24.48.0.1")/*(strlen(ipAddress))*/ );
+		strcpy (ip_address, ipAddress);
+		printf("ip_address = %s", ip_address);
 	}
 	return client_socket;
 }
@@ -205,14 +211,31 @@ void execution( int internet_socket )
 		exit( 1 );
 	}
 	
-	snprintf(get_request, 100000,
-        "GET /json/24.48.0.1 HTTP/1.1\r\n"
-        "Host: ip-api.com\r\n"
-        "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0\r\n"
-        "Accept: */*\r\n"
+	char getRequest[1000000];
+	/*
+	strcat (get_request, "GET /json/");
+	strcat (get_request, ip_address);
+	strcat (get_request, " HTTP/1.1\r\n");
+	strcat (get_request, 
+		"Host: www.ip-api.com\r\n"
+        //"User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0\r\n"
+        "Accept: application/json\r\n"
         "Connection: close\r\n"
         "\r\n"
+	);
+	*/
+	printf("%s", ip_address);
+	snprintf(get_request, 100000,
+        "GET /json/%s HTTP/1.1\r\n"
+        "Host: www.ip-api.com\r\n"
+        //"User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0\r\n"
+        "Accept: application/json\r\n"
+        "Connection: close\r\n"
+        "\r\n", ip_address
     );
+	
+	printf("\n%s\n", getRequest);
+	
 	result = send(sockfd, get_request, strlen(get_request), 0);
 	if( result == -1 )
 	{
