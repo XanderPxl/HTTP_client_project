@@ -1,22 +1,23 @@
-The HTTP_client project attemps to create a TCP server that functions as followed:
+The UnoReverse program functions as a simple server that attacks another computer when they connect with the server by sending large amounts of data until it crashes.
+
+*** note that this is strictly intended for educational puposes only ***
 
 
-*	Firstly it will listen on port 22
+*	The program will firstly listen on port 22 (default ssh).
 
-*	It accepts multiple connections
+*	Secondly the server will create a new HTTP client for each new connection that is established on port 22.  Then connect to the ip-api.com api and write the ip address of the client in a seperate .txt file. 
 
-*	It finds the IP address of the client and logs that address in a sepparate file
+*	After this, a get request will be sent to the api in order to retreive more information about the client from port 22. This information is then logged in the logs.txt file.
 
-*	The TCP server will secondly start a new HTTP client for each new connection
+*	The fourth step consists of sending as much data as possible to the client on port 22 untill it crashes, after wich it will free the allocated memory from the HTTP client.
 
-*	Connect to the ip-api.com api to retrieve more data about the client
-
-*	And lastly it will send as much data as possible to the client on port 22 untill it crashes
+*	And finally the server will continue listening on port 22 and repeat the entire process.
 
 
-More functions might follow but this will be the goal for now.
-This code is written during my first year of college so this code won't be perfect.
-Note that this project is part of the 'netwerken' tasks from PXL-digital.
+
+This code is written during my first year of college and can be improved.
+Bugs might occur so the use of this program is at your own risk.
+The project was part of the course 'Networking' during the first year of Elektronics-ICT 2022-2023 in PXL-Digital.
 
 
 
@@ -24,4 +25,4 @@ Note that this project is part of the 'netwerken' tasks from PXL-digital.
 
 
 Written by Aerts Xander on 09/05/2023.
-Updated by Aerts Xander on 16/05/2023.
+Updated on 16/05/2023 and rewritten on 22/05/2023
