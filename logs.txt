@@ -1,107 +1,110 @@
 ::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
-::1
+HTTP/1.1 200 OK
+Date: Sat, 20 May 2023 10:31:25 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 58
+Access-Control-Allow-Origin: *
+X-Ttl: 60
+X-Rl: 44
+
+{"status":"fail","message":"reserved range","query":"::1"}
+::1
+HTTP/1.1 200 OK
+Date: Sat, 20 May 2023 10:31:50 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 58
+Access-Control-Allow-Origin: *
+X-Ttl: 35
+X-Rl: 43
+
+{"status":"fail","message":"reserved range","query":"::1"}
+::1
+HTTP/1.1 200 OK
+Date: Sat, 20 May 2023 10:46:53 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 58
+Access-Control-Allow-Origin: *
+X-Ttl: 60
+X-Rl: 44
+
+{"status":"fail","message":"reserved range","query":"::1"}
+IP address from client = ::1
+IP address from client = HTTP/1.1 200 OK
+Date: Mon, 22 May 2023 18:30:37 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 58
+Access-Control-Allow-Origin: *
+X-Ttl: 60
+X-Rl: 44
+
+{"status":"fail","message":"reserved range","query":"::1"}
+IP address from client = ::1
+IP address from client = HTTP/1.1 200 OK
+Date: Mon, 22 May 2023 18:30:48 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 58
+Access-Control-Allow-Origin: *
+X-Ttl: 49
+X-Rl: 43
+
+{"status":"fail","message":"reserved range","query":"::1"}
+IP address from client = ::1
+IP address from client = HTTP/1.1 200 OK
+Date: Mon, 22 May 2023 18:30:57 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 58
+Access-Control-Allow-Origin: *
+X-Ttl: 40
+X-Rl: 42
+
+{"status":"fail","message":"reserved range","query":"::1"}
+IP address from client = ::1
+IP address from client = HTTP/1.1 200 OK
+Date: Mon, 22 May 2023 18:31:04 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 58
+Access-Control-Allow-Origin: *
+X-Ttl: 33
+X-Rl: 41
+
+{"status":"fail","message":"reserved range","query":"::1"}
+IP address from client = ::1
+IP address from client = HTTP/1.1 200 OK
+Date: Mon, 22 May 2023 18:31:16 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 58
+Access-Control-Allow-Origin: *
+X-Ttl: 21
+X-Rl: 40
+
+{"status":"fail","message":"reserved range","query":"::1"}
+IP address from client = ::1
+IP address from client = HTTP/1.1 200 OK
+Date: Mon, 22 May 2023 18:45:08 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 281
+Access-Control-Allow-Origin: *
+X-Ttl: 60
+X-Rl: 44
+
+{"status":"success","country":"Belgium","countryCode":"BE","region":"VLG","regionName":"Flanders","city":"Beverlo","zip":"3581","lat":51.0898,"lon":5.2182,"timezone":"Europe/Brussels","isp":"Telenet Operaties N.V.","org":"Telenet","as":"AS6848 Telenet BVBA","query":"84.195.97.34"}
+IP address from client = ::1
+IP address from client = HTTP/1.1 200 OK
+Date: Mon, 22 May 2023 18:45:29 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 58
+Access-Control-Allow-Origin: *
+X-Ttl: 38
+X-Rl: 43
+
+{"status":"fail","message":"reserved range","query":"::1"}
+IP address from client = ::1
+IP address from client = HTTP/1.1 200 OK
+Date: Mon, 22 May 2023 18:45:38 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 58
+Access-Control-Allow-Origin: *
+X-Ttl: 29
+X-Rl: 42
+
+{"status":"fail","message":"reserved range","query":"::1"}
